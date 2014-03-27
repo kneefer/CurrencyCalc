@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:chart="clr-namespace:De.TorstenMandelkow.MetroChart;assembly=De.TorstenMandelkow.MetroChart"
+             DataContext="{Binding History, Source={StaticResource ViewModelLocator}}"
              mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300">
     <chart:PieChart
         Style="{StaticResource MinimalChartStyle}"

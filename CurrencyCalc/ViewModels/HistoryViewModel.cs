@@ -1,8 +1,9 @@
 ﻿using System.Collections.ObjectModel;
+using GalaSoft.MvvmLight;
 
 namespace CurrencyCalc.ViewModels
 {
-    public class HistoryViewModel
+    public class HistoryViewModel : ViewModelBase
     {
         public ObservableCollection<TestClass> Errors { get; private set; }
 

@@ -7,7 +7,6 @@ namespace CurrencyCalc.Pages
         public About()
         {
             InitializeComponent();
-            DataContext = new AboutViewModel();
         }
     }
 }

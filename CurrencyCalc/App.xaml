@@ -4,15 +4,16 @@
              xmlns:d1p1="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:chart="clr-namespace:De.TorstenMandelkow.MetroChart;assembly=De.TorstenMandelkow.MetroChart">
   <Application.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/FirstFloor.ModernUI;component/Assets/ModernUI.xaml" />
-                <ResourceDictionary Source="/FirstFloor.ModernUI;component/Assets/ModernUI.Dark.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-            <Style x:Key="MinimalChartStyle" TargetType="chart:ChartBase">
-                <Setter Property="Width" Value="500"/>
-                <Setter Property="Height" Value="500"/>
-            </Style>
-        </ResourceDictionary>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/FirstFloor.ModernUI;component/Assets/ModernUI.xaml" />
+        <ResourceDictionary Source="/FirstFloor.ModernUI;component/Assets/ModernUI.Dark.xaml" />
+      </ResourceDictionary.MergedDictionaries>
+      <Style x:Key="MinimalChartStyle" TargetType="chart:ChartBase">
+        <Setter Property="Width" Value="500" />
+        <Setter Property="Height" Value="500" />
+      </Style>
+      <vm:ViewModelLocator x:Key="ViewModelLocator" d:IsDataSource="True" xmlns:vm="clr-namespace:CurrencyCalc.ViewModels" />
+    </ResourceDictionary>
   </Application.Resources>
 </Application>

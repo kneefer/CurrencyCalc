@@ -5,20 +5,26 @@
         Title="Currency Calc - 4 Egzotech" Height="455" Width="722"
         AllowsTransparency="True" WindowStyle="None"
         IsTitleVisible="True" ContentSource="Pages/Live.xaml">
+    
     <mui:ModernWindow.MenuLinkGroups>
+        
         <mui:LinkGroup DisplayName="currency calc - welcome">
             <mui:LinkGroup.Links>
                 <mui:Link DisplayName="LIVE" Source="Pages/Live.xaml" />
                 <mui:Link DisplayName="HISTORY" Source="Pages/History.xaml"  />
             </mui:LinkGroup.Links>
         </mui:LinkGroup>
+        
         <mui:LinkGroup DisplayName="currency calc" GroupName="settings">
             <mui:LinkGroup.Links>
                 <mui:Link DisplayName="About app" Source="/Pages/About.xaml" />
             </mui:LinkGroup.Links>
         </mui:LinkGroup>
+        
     </mui:ModernWindow.MenuLinkGroups>
+    
     <mui:ModernWindow.TitleLinks>
         <mui:Link DisplayName="about" Source="/Pages/About.xaml" />
     </mui:ModernWindow.TitleLinks>
+    
 </mui:ModernWindow>

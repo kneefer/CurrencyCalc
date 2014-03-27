@@ -7,7 +7,6 @@ namespace CurrencyCalc.Pages
         public History()
         {
             InitializeComponent();
-            DataContext = new HistoryViewModel();
         }
     }
 }

@@ -161,3 +161,8 @@ $RECYCLE.BIN/
 /packages/Extended.Wpf.Toolkit.2.1.0/Extended.Wpf.Toolkit.2.1.0.nupkg
 /packages/Extended.Wpf.Toolkit.2.1.0/tools
 /packages/Extended.Wpf.Toolkit.2.1.0/lib
+/packages/MvvmLightLibs.4.2.30.0
+/packages/MvvmLight.4.2.30.0/MvvmLight.4.2.30.0.nupkg
+/packages/MvvmLight.4.2.30.0
+/packages/EntityFramework.6.1.0
+/packages/CommonServiceLocator.1.0

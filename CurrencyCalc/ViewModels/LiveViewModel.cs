@@ -1,12 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Windows;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 
 namespace CurrencyCalc.ViewModels
 {
-    public class LiveViewModel
+    public class LiveViewModel : ViewModelBase
     {
+        public RelayCommand ButtonCommand { get; set; }
+        public LiveViewModel()
+        {
+            ButtonCommand = new RelayCommand(OKFunc);
+        }
+
+        private void OKFunc()
+        {
+            MessageBox.Show("ok");
+        }
+        
     }
 }

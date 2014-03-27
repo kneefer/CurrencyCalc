@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows.Documents;
 using CurrencyCalc.Models;
 using RestSharp;
 using RestSharp.Extensions;
@@ -27,14 +26,14 @@ namespace CurrencyCalc.Utilities
             var tcs = new TaskCompletionSource<IEnumerable<Rate>>();
 
             var resource = String.Format(@"yql?q=select {3} from yahoo.finance.xchange {0}{1}{2}",
-                                          "where pair in (%22" + currencies.Aggregate((a, b) => String.Format("{0}%22%2C%22{1}", a, b)) + "%22)",
+                                          "where pair in (%22" + currencies.Aggregate((a, b) => String.Format("{0}%22,%22{1}", a, b)) + "%22)",
                                           "&format=json",
                                           "&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys",
                                           columnsList.Aggregate((a, b) => a + "," + b))
                 .HtmlDecode();
 
             var request = new RestRequest(resource, Method.GET);
-            _client.ExecuteAsync<RootObject>(request, result => tcs.SetResult(result.Data.Query.Results.Rate));
+            _client.ExecuteAsync<RootObject>(request, result => tcs.SetResult(result.Data.Query.Results.Rates));
 
             return tcs.Task;
         }
