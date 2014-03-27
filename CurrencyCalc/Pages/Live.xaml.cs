@@ -2,12 +2,12 @@
 
 namespace CurrencyCalc.Pages
 {
-    public partial class MainWindow
+    public partial class Live
     {
-        public MainWindow()
+        public Live()
         {
             InitializeComponent();
-            this.DataContext = new MainViewModel();
+            DataContext = new LiveViewModel();
         }
     }
 }

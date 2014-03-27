@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="De.TorstenMandelkow.MetroChart">
+      <HintPath>.\De.TorstenMandelkow.MetroChart.dll</HintPath>
+    </Reference>
     <Reference Include="FirstFloor.ModernUI">
       <HintPath>..\packages\ModernUI.WPF.1.0.5\lib\net45\FirstFloor.ModernUI.dll</HintPath>
     </Reference>
@@ -82,10 +85,21 @@
     <Compile Include="Models\Rate.cs" />
     <Compile Include="Models\Results.cs" />
     <Compile Include="Models\RootObject.cs" />
+    <Compile Include="Pages\About.xaml.cs">
+      <DependentUpon>About.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\History.xaml.cs">
+      <DependentUpon>History.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Live.xaml.cs">
+      <DependentUpon>Live.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Annotations.cs" />
-    <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="Utilities\YahooRest.cs" />
-    <Page Include="Pages\MainWindow.xaml">
+    <Compile Include="ViewModels\AboutViewModel.cs" />
+    <Compile Include="ViewModels\HistoryViewModel.cs" />
+    <Compile Include="ViewModels\LiveViewModel.cs" />
+    <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -93,10 +107,22 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Pages\MainWindow.xaml.cs">
+    <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\About.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\History.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Live.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -128,6 +154,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\" />
+    <Folder Include="Infrastructure\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
