@@ -1,6 +1,4 @@
-﻿using CurrencyCalc.ViewModels;
-
-namespace CurrencyCalc.Pages
+﻿namespace CurrencyCalc.Pages
 {
     public partial class About
     {

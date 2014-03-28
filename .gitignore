@@ -154,7 +154,6 @@ $RECYCLE.BIN/
 
 # Mac desktop service store files
 .DS_Store
-/CurrencyCalc.sln.DotSettings
 /packages/ModernUI.WPF.1.0.5
 /packages/RestSharp.104.4.0
 /packages/repositories.config
