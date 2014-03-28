@@ -1,4 +1,7 @@
-﻿namespace CurrencyCalc.Pages
+﻿using System.Collections.Generic;
+using CurrencyCalc.Utilities;
+
+namespace CurrencyCalc.Pages
 {
     public partial class Live
     {
@@ -6,8 +9,8 @@
         {
             InitializeComponent();
 
-            //var rest = new YahooXChangeRest();
-            //rest.DoXChangeRequestAsync(new List<string> {"PLN"});
+            var rest = new YahooXChangeRest();
+            rest.TakeExchangesAsync(new List<string> {"USD", "EUR", "CHF"}, "PLN");
         }
     }
 }

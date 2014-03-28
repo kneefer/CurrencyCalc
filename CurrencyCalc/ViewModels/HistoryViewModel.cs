@@ -1,19 +1,31 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Windows;
 using CurrencyCalc.Infrastructure;
 using EF;
+using EF.Entities;
 using FirstFloor.ModernUI.Presentation;
 using GalaSoft.MvvmLight.Messaging;
+using System.Threading.Tasks;
 
 namespace CurrencyCalc.ViewModels
 {
     public partial class HistoryViewModel
     {
-        private EFContext _context = new EFContext();
+        private EFContext _context = App.Context;
+        private readonly Task _initializingTask;
 
         public HistoryViewModel()
         {
-            Currencies = _context.Currencies.ToLinksCollection();
+            _initializingTask = LoadCurrencies();
+        }
+
+        private async Task LoadCurrencies()
+        {
+            Currencies = (await _context.Currencies.ToListAsync()).ToLinksCollection();
 
             SelectedCurrencyLink = Currencies.Count > 0
                 ? Currencies.First().Source

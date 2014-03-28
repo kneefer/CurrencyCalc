@@ -17,10 +17,12 @@ namespace CurrencyCalc.Utilities
             _client = new RestClient(BaseUrl);
         }
 
-        public Task<IEnumerable<Rate>> DoXChangeRequestAsync(IEnumerable<string> currencies, IEnumerable<string> columnsList = null)
+        public Task<IEnumerable<Rate>> TakeExchangesAsync(IEnumerable<string> currencies, string baseCurrency, IEnumerable<string> columnsList = null)
         {
             // if there weren't any selections - default parameter
             if (columnsList == null) columnsList = new List<string> {"*"};
+
+            currencies = currencies.Select(x => x += baseCurrency);
 
             // provides async result in the caller
             var tcs = new TaskCompletionSource<IEnumerable<Rate>>();

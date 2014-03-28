@@ -14,7 +14,7 @@
         
         <TextBlock FontSize="40" Text="{Binding Currency.Name}" />
         
-        <sparrow:SparrowChart Grid.Row="1">
+        <sparrow:SparrowChart Grid.Row="1" Margin="0 0 10 0">
             <sparrow:SparrowChart.XAxis>
                 <sparrow:DateTimeXAxis ShowMajorTicks="True" MajorTicksPosition="Cross" Header="Date" StringFormat="hh:mm - dd.MM" LabelAngle="45" />
             </sparrow:SparrowChart.XAxis>
