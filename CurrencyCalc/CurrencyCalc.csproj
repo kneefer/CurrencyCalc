@@ -100,6 +100,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Content\DefaultCurrencyHistory.xaml.cs">
+      <DependentUpon>DefaultCurrencyHistory.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\SelectedCurrencyHistory.xaml.cs">
+      <DependentUpon>SelectedCurrencyHistory.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Infrastructure\ExtensionMethods.cs" />
     <Compile Include="Models\REST Models\Query.cs" />
     <Compile Include="Models\REST Models\Rate.cs" />
@@ -116,10 +122,20 @@
     </Compile>
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Utilities\YahooRest.cs" />
+    <Compile Include="ViewModels\SelCurrHistoryViewModel.cs" />
     <Compile Include="ViewModels\AboutViewModel.cs" />
     <Compile Include="ViewModels\HistoryViewModel.cs" />
     <Compile Include="ViewModels\LiveViewModel.cs" />
+    <Compile Include="ViewModels\Properties\HistoryVMProperties.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
+    <Page Include="Content\DefaultCurrencyHistory.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Content\SelectedCurrencyHistory.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -173,9 +189,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Content\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\EF\EF.csproj">
       <Project>{67584e0b-3842-4372-a9f7-d8bf582130ae}</Project>
