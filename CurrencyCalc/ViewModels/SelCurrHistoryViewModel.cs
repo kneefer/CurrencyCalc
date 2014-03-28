@@ -1,4 +1,7 @@
-﻿using EF.Entities;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using EF.Entities;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
 
@@ -6,6 +9,8 @@ namespace CurrencyCalc.ViewModels
 {
     public class SelCurrHistoryViewModel : ViewModelBase
     {
+        private const int LimitOfPoints = 10;
+
         private CurrencyEF _currency;
         public CurrencyEF Currency
         {
@@ -20,14 +25,23 @@ namespace CurrencyCalc.ViewModels
             }
         }
 
-        public SelCurrHistoryViewModel()
+        public IEnumerable<RateEF> Rates
         {
-            Messenger.Default.Register<CurrencyEF>(this, Handle);
+            get { return _currency.Rates.Take(LimitOfPoints); }
         }
 
-        private void Handle(CurrencyEF currency)
+        public SelCurrHistoryViewModel()
         {
-            Currency = currency;
+            Messenger.Default.Register<CurrencyEF>(this, x =>
+            {
+                Currency = x;
+                ReloadChart();
+            });
+        }
+
+        private void ReloadChart()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

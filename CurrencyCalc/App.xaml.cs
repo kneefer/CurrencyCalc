@@ -1,7 +1,7 @@
 ﻿using System.Data.Entity;
-using System.Runtime.Remoting.Contexts;
 using System.Windows;
 using EF;
+using FirstFloor.ModernUI.Presentation;
 
 namespace CurrencyCalc
 {
@@ -14,6 +14,8 @@ namespace CurrencyCalc
             base.OnStartup(e);
             Database.SetInitializer(new EFContextInitializer());
             Context = new EFContext();
+
+            AppearanceManager.Current.FontSize = FontSize.Large;
         }
     }
 }
