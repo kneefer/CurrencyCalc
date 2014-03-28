@@ -1,5 +1,8 @@
-﻿using FirstFloor.ModernUI.Presentation;
+﻿using System;
+using EF.Entities;
+using FirstFloor.ModernUI.Presentation;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 
 namespace CurrencyCalc.ViewModels
 {
@@ -19,9 +22,8 @@ namespace CurrencyCalc.ViewModels
             }
         }
 
-        private Link _selectedCurrencyLink;
-
-        public Link SelectedCurrencyLink
+        private Uri _selectedCurrencyLink;
+        public Uri SelectedCurrencyLink
         {
             get { return _selectedCurrencyLink; }
             set
@@ -29,10 +31,10 @@ namespace CurrencyCalc.ViewModels
                 if (value != _selectedCurrencyLink)
                 {
                     _selectedCurrencyLink = value;
+                    SelectedCurrencyLinkChanged(value);
                     RaisePropertyChanged("SelectedCurrencyLink");
                 }
             }
         }
-        
     }
 }

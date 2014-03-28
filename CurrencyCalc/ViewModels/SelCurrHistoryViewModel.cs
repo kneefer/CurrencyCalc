@@ -7,7 +7,6 @@ namespace CurrencyCalc.ViewModels
     public class SelCurrHistoryViewModel : ViewModelBase
     {
         private CurrencyEF _currency;
-
         public CurrencyEF Currency
         {
             get { return _currency; }
@@ -23,7 +22,12 @@ namespace CurrencyCalc.ViewModels
 
         public SelCurrHistoryViewModel()
         {
-            Messenger.Default.Register<CurrencyEF>(this, x => Currency = x);
+            Messenger.Default.Register<CurrencyEF>(this, Handle);
+        }
+
+        private void Handle(CurrencyEF currency)
+        {
+            Currency = currency;
         }
     }
 }

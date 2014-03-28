@@ -9,7 +9,7 @@
              mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300">
 
     <Grid Style="{StaticResource ContentRoot}">
-        <mui:ModernTab Layout="List" SelectedSource="{Binding SelectedCurrencyLink}"
-                       Links="{Binding Currencies}" SelectedSourceChanged="ModernTab_OnSelectedSourceChanged" />
+        <mui:ModernTab Layout="List" SelectedSource="{Binding SelectedCurrencyLink, Mode=TwoWay}"
+                       Links="{Binding Currencies}" />
     </Grid>
 </UserControl>

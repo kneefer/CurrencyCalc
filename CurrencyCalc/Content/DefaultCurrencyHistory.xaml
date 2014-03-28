@@ -7,5 +7,6 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
             <TextBlock>empty</TextBlock>
+        <Rectangle Width="100" Height="100" Stroke="Aqua"></Rectangle>
     </Grid>
 </UserControl>

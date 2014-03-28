@@ -8,5 +8,6 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
         <TextBlock Text="{Binding Currency.Name}" />
+        <TextBlock>test w selected currency </TextBlock>
     </Grid>
 </UserControl>
