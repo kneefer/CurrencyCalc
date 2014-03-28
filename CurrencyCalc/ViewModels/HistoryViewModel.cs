@@ -1,44 +1,18 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Windows;
+using EF;
 using GalaSoft.MvvmLight;
+using System.Data.Entity;
 
 namespace CurrencyCalc.ViewModels
 {
     public class HistoryViewModel : ViewModelBase
     {
-        public ObservableCollection<TestClass> Errors { get; private set; }
+        private EFContext _context = new EFContext();
 
         public HistoryViewModel()
         {
-            Errors = new ObservableCollection<TestClass>
-            {
-                new TestClass() {Category = "Globalization", Number = 75},
-                new TestClass() {Category = "Features", Number = 2},
-                new TestClass() {Category = "ContentTypes", Number = 12},
-                new TestClass() {Category = "Correctness", Number = 83},
-                new TestClass() {Category = "Best Practices", Number = 29}
-            };
+            App.Context.Currencies.LoadAsync();
+            MessageBox.Show(string.Join(", ", _context.Currencies));
         }
-
-        private object _selectedItem = null;
-        public object SelectedItem
-        {
-            get
-            {
-                return _selectedItem;
-            }
-            set
-            {
-                // selected item has changed
-                _selectedItem = value;
-            }
-        }
-    }
-
-    // class which represent a data point in the chart
-    public class TestClass
-    {
-        public string Category { get; set; }
-
-        public int Number { get; set; }
     }
 }
