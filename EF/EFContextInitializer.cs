@@ -4,33 +4,33 @@ using EF.Entities;
 
 namespace EF
 {
-    public class EFContextInitializer : DropCreateDatabaseIfModelChanges<EFContext>
+    public class EFContextInitializer : DropCreateDatabaseAlways<EFContext>
     {
         protected override void Seed(EFContext context)
         {
             //
             // ### RATES ###
 
-            var rate01 = new RateEF { Time = DateTime.Today, Value = 0.32 };
-            var rate02 = new RateEF { Time = DateTime.Today, Value = 0.23 };
-            var rate03 = new RateEF { Time = DateTime.Today, Value = 0.25 };
-            var rate04 = new RateEF { Time = DateTime.Today, Value = 0.33 };
-            var rate05 = new RateEF { Time = DateTime.Today, Value = 0.35 };
-            var rate06 = new RateEF { Time = DateTime.Today, Value = 0.30 };
+            var rate01 = new RateEF { Time = DateTime.Today + TimeSpan.FromHours(0), Value = 0.32 };
+            var rate02 = new RateEF { Time = DateTime.Today + TimeSpan.FromHours(1), Value = 0.23 };
+            var rate03 = new RateEF { Time = DateTime.Today + TimeSpan.FromHours(2), Value = 0.25 };
+            var rate04 = new RateEF { Time = DateTime.Today + TimeSpan.FromHours(3), Value = 0.33 };
+            var rate05 = new RateEF { Time = DateTime.Today + TimeSpan.FromHours(4), Value = 0.35 };
+            var rate06 = new RateEF { Time = DateTime.Today + TimeSpan.FromHours(5), Value = 0.30 };
 
-            var rate07 = new RateEF { Time = DateTime.Today, Value = 1.53 };
-            var rate08 = new RateEF { Time = DateTime.Today, Value = 1.26 };
-            var rate09 = new RateEF { Time = DateTime.Today, Value = 1.36 };
-            var rate10 = new RateEF { Time = DateTime.Today, Value = 1.48 };
-            var rate11 = new RateEF { Time = DateTime.Today, Value = 1.31 };
-            var rate12 = new RateEF { Time = DateTime.Today, Value = 1.28 };
+            var rate07 = new RateEF { Time = DateTime.Today + TimeSpan.FromHours(0), Value = 1.53 };
+            var rate08 = new RateEF { Time = DateTime.Today + TimeSpan.FromHours(1), Value = 1.26 };
+            var rate09 = new RateEF { Time = DateTime.Today + TimeSpan.FromHours(2), Value = 1.36 };
+            var rate10 = new RateEF { Time = DateTime.Today + TimeSpan.FromHours(3), Value = 1.48 };
+            var rate11 = new RateEF { Time = DateTime.Today + TimeSpan.FromHours(4), Value = 1.31 };
+            var rate12 = new RateEF { Time = DateTime.Today + TimeSpan.FromHours(5), Value = 1.28 };
 
-            var rate13 = new RateEF { Time = DateTime.Today, Value = 1.13 };
-            var rate14 = new RateEF { Time = DateTime.Today, Value = 1.01 };
-            var rate15 = new RateEF { Time = DateTime.Today, Value = 1.23 };
-            var rate16 = new RateEF { Time = DateTime.Today, Value = 1.37 };
-            var rate17 = new RateEF { Time = DateTime.Today, Value = 1.22 };
-            var rate18 = new RateEF { Time = DateTime.Today, Value = 1.25 };
+            var rate13 = new RateEF { Time = DateTime.Today + TimeSpan.FromHours(0), Value = 1.13 };
+            var rate14 = new RateEF { Time = DateTime.Today + TimeSpan.FromHours(1), Value = 1.01 };
+            var rate15 = new RateEF { Time = DateTime.Today + TimeSpan.FromHours(2), Value = 1.23 };
+            var rate16 = new RateEF { Time = DateTime.Today + TimeSpan.FromHours(3), Value = 1.37 };
+            var rate17 = new RateEF { Time = DateTime.Today + TimeSpan.FromHours(4), Value = 1.22 };
+            var rate18 = new RateEF { Time = DateTime.Today + TimeSpan.FromHours(5), Value = 1.25 };
 
             //
             // ### CURRENCIES ###

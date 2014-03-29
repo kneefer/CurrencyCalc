@@ -11,14 +11,15 @@ namespace CurrencyCalc.ViewModels
 
             SimpleIoc.Default.Register<LiveViewModel>();
             SimpleIoc.Default.Register<AboutViewModel>();
-            SimpleIoc.Default.Register<HistoryViewModel>();
-            SimpleIoc.Default.Register<SelCurrHistoryViewModel>();
+            SimpleIoc.Default.Register<HistoryViewModel>(true);
+            SimpleIoc.Default.Register<SelCurrHistoryViewModel>(true);
         }
 
         public LiveViewModel Live
         {
             get
             {
+                
                 return ServiceLocator.Current.GetInstance<LiveViewModel>();
             }
         }
