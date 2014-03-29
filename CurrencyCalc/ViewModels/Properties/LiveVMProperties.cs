@@ -18,6 +18,7 @@ namespace CurrencyCalc.ViewModels
         private CurrencyEF _selectedCurrencyEF;
         private CurrencyEF _baseCurrency;
         private string _newCurrencyName;
+        private bool _isBusy;
 
         public CurrencyEF SelectedCurrency
         {
@@ -58,6 +59,18 @@ namespace CurrencyCalc.ViewModels
                 {
                     _moneyCalcModel = value;
                     RaisePropertyChanged("MoneyCalcModel");
+                }
+            }
+        }
+        public bool IsBusy
+        {
+            get { return _isBusy; }
+            set
+            {
+                if (value != _isBusy)
+                {
+                    _isBusy = value;
+                    RaisePropertyChanged("IsBusy");
                 }
             }
         }

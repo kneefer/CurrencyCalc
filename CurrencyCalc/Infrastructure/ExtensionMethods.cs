@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -13,11 +12,11 @@ namespace CurrencyCalc.Infrastructure
 {
     public static class ExtensionMethods
     {
-        private static readonly Regex _regex = new Regex(@"[?|&](\w+)=([^?|^&]+)");
+        private static readonly Regex Regex = new Regex(@"[?|&](\w+)=([^?|^&]+)");
 
         public static IReadOnlyDictionary<string, string> ParseQueryString(this Uri uri)
         {
-            var match = _regex.Match(uri.OriginalString);
+            var match = Regex.Match(uri.OriginalString);
             var paramaters = new Dictionary<string, string>();
             while (match.Success)
             {
@@ -41,7 +40,7 @@ namespace CurrencyCalc.Infrastructure
 
         public static Link ToLink(this CurrencyEF currency)
         {
-            return new Link()
+            return new Link
             {
                 DisplayName = currency.Name,
                 Source = new Uri(
@@ -63,6 +62,11 @@ namespace CurrencyCalc.Infrastructure
                 currency.CurrentValue = found.Rate.MapTheDouble();
                 currency.LastUpdate = Mappers.MapTheDate(found.Date, found.Time);
             }
-        } 
+        }
+
+        public static ObservableCollection<T> ToObservableCollection<T>(this IEnumerable<T> original)
+        {
+            return new ObservableCollection<T>(original);
+        }
     }
 }

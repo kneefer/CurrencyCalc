@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d" d:DesignHeight="439" d:DesignWidth="639"
              DataContext="{Binding Live, Source={StaticResource ViewModelLocator}}"
-             xmlns:utilities="clr-namespace:CurrencyCalc.Utilities">
+             xmlns:utilities="clr-namespace:CurrencyCalc.Utilities"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit">
 
     <UserControl.Resources>
         <utilities:InstanceToEnableConverter x:Key="InstanceToEnableConverter" />
@@ -13,18 +14,21 @@
     
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+
+        <ProgressBar Grid.Row="0" IsIndeterminate="{Binding IsBusy}" />
         
-        <Grid Grid.Row="0">
+        <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*" />
                 <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
             
             <DataGrid ItemsSource="{Binding Currencies}" SelectedItem="{Binding SelectedCurrency}"
-                      AutoGenerateColumns="False" CanUserAddRows="False" Grid.Column="0">
+                      AutoGenerateColumns="False" CanUserAddRows="False" Grid.Column="0" SelectionMode="Single">
                 <DataGrid.Columns>
                     <DataGridTemplateColumn MinWidth="120" Header="Name" Width="*" IsReadOnly="True">
                         <DataGridTemplateColumn.CellTemplate>
@@ -66,7 +70,7 @@
             </StackPanel>
         </Grid>
         
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="3*" />
                 <ColumnDefinition Width="*" />

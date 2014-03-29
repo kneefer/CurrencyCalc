@@ -36,9 +36,15 @@ namespace CurrencyCalc.ViewModels
 
         private async void AddNewCurrency()
         {
+            IsBusy = true;
             if (_context.Currencies.FirstOrDefault(x => x.Name.Equals(
                 NewCurrencyName, StringComparison.CurrentCultureIgnoreCase)) == null)
             {
+                if (string.IsNullOrEmpty(NewCurrencyName))
+                {
+                    IsBusy = false;
+                    return;
+                }
                 var rest = new YahooXChangeRest();
                 var foundCurrency = await rest.CheckIfCurrencyExistsAsync(NewCurrencyName, BaseCurrency.Name);
 
@@ -51,6 +57,7 @@ namespace CurrencyCalc.ViewModels
                     }.Show();
 
                     NewCurrencyName = String.Empty;
+                    IsBusy = false;
                     return;
                 }
 
@@ -72,6 +79,7 @@ namespace CurrencyCalc.ViewModels
             }
 
             NewCurrencyName = String.Empty;
+            IsBusy = false;
         }
         
         private void SwapCurrencies()
@@ -94,12 +102,25 @@ namespace CurrencyCalc.ViewModels
 
         private async Task UpdateCurrencies()
         {
+            IsBusy = true;
             var rest = new YahooXChangeRest();
             var currencies = await rest.TakeExchangesAsync(
                 Currencies.ToListOfString(),
                 BaseCurrency.Name);
 
-            Currencies.Update(currencies);
+            if (currencies == null)
+            {
+                new ModernDialog
+                {
+                    Title = "Error",
+                    Content = "Connection problems"
+                }.Show();
+            }
+            else
+            {
+                Currencies.Update(currencies);
+            }
+            IsBusy = false;
         }
 
         private void InputChanged(string str)

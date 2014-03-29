@@ -10,16 +10,15 @@ namespace CurrencyCalc.ViewModels
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
             SimpleIoc.Default.Register<LiveViewModel>(true);
-            SimpleIoc.Default.Register<AboutViewModel>();
-            SimpleIoc.Default.Register<HistoryViewModel>(true);
+            SimpleIoc.Default.Register<HistoryViewModel>();
             SimpleIoc.Default.Register<SelCurrHistoryViewModel>(true);
+            SimpleIoc.Default.Register<AboutViewModel>();
         }
 
         public LiveViewModel Live
         {
             get
             {
-                
                 return ServiceLocator.Current.GetInstance<LiveViewModel>();
             }
         }

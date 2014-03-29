@@ -14,7 +14,7 @@ namespace CurrencyCalc.Utilities
         private readonly RestClient _client;
         public YahooXChangeRest()
         {
-            _client = new RestClient(BaseUrl) {Timeout = 2000};
+            _client = new RestClient(BaseUrl) {Timeout = 4000};
         }
 
         public Task<IEnumerable<rate>> TakeExchangesAsync(IEnumerable<string> currencies, string baseCurrency, IEnumerable<string> columnsList = null)
@@ -36,7 +36,7 @@ namespace CurrencyCalc.Utilities
 
             var request = new RestRequest(resource, Method.GET);
 
-            _client.ExecuteAsync<RootObject>(request, result => tcs.SetResult(result.ResponseStatus == ResponseStatus.TimedOut
+            _client.ExecuteAsync<RootObject>(request, result => tcs.SetResult(result == null
                 ? null
                 : result.Data.Query.Results.Rate));
 
