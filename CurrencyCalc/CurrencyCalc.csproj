@@ -109,6 +109,7 @@
     <Compile Include="Content\SelectedCurrencyHistory.xaml.cs">
       <DependentUpon>SelectedCurrencyHistory.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\DispatchService.cs" />
     <Compile Include="Infrastructure\ExtensionMethods.cs" />
     <Compile Include="Models\MoneyCalcModel.cs" />
     <Compile Include="Models\REST Models\Query.cs" />

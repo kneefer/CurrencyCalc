@@ -21,6 +21,7 @@ namespace CurrencyCalc.ViewModels
         public HistoryViewModel()
         {
             _initializingTask = LoadCurrencies();
+            Messenger.Default.Register<CurrencyEF>(this, "newCurrencyMsg", x => Currencies.Add(x.ToLink()));
         }
 
         private async Task LoadCurrencies()
@@ -41,7 +42,7 @@ namespace CurrencyCalc.ViewModels
             var selectedCurrency = _context.Currencies.FirstOrDefault(x => x.Name == currencyName);
 
             if (selectedCurrency != null)
-                Messenger.Default.Send(selectedCurrency);
+                Messenger.Default.Send(selectedCurrency, "currencyChangedMsg");
         }
     }
 }

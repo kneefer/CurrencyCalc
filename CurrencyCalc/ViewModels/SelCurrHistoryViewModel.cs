@@ -32,7 +32,7 @@ namespace CurrencyCalc.ViewModels
 
         public SelCurrHistoryViewModel()
         {
-            Messenger.Default.Register<CurrencyEF>(this, x =>
+            Messenger.Default.Register<CurrencyEF>(this, "currencyChangedMsg", x =>
             {
                 Currency = x;
                 ReloadChart();

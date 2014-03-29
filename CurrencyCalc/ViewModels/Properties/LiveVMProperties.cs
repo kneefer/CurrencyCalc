@@ -26,7 +26,8 @@ namespace CurrencyCalc.ViewModels
                 {
                     _selectedCurrencyEF = value;
                     RaisePropertyChanged("SelectedCurrency");
-                    ProceedCalculation();
+                    MoneyCalcModel.InputCurrSymbol = value.Name;
+                    MoneyCalcModel.OutputCurrSymbol = BaseCurrency.Name;
                 }
             }
         }
@@ -39,10 +40,13 @@ namespace CurrencyCalc.ViewModels
                 {
                     _baseCurrency = value;
                     RaisePropertyChanged("BaseCurrency");
-                    ProceedCalculation();
+                    MoneyCalcModel.InputCurrSymbol = SelectedCurrency.Name;
+                    MoneyCalcModel.OutputCurrSymbol = value.Name;
+                    BaseCurrencyChanged();
                 }
             }
         }
+
         public MoneyCalcModel MoneyCalcModel
         {
             get { return _moneyCalcModel; }
@@ -83,7 +87,7 @@ namespace CurrencyCalc.ViewModels
 
         private void InitializeCommands()
         {
-            ReverseCurrenciesCommand = new RelayCommand(ReverseCurrencies);
+            ReverseCurrenciesCommand = new RelayCommand(SwapCurrencies);
             AddNewCurrencyCommand = new RelayCommand(AddNewCurrency);
         }
     }

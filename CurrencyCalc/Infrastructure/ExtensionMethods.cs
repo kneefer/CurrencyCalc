@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 using EF.Entities;
 using FirstFloor.ModernUI.Presentation;
@@ -29,16 +30,26 @@ namespace CurrencyCalc.Infrastructure
 
             foreach (var currency in currencies)
             {
-                toReturn.Add(new Link
-                {
-                    DisplayName = currency.Name,
-                    Source = new Uri(
-                        "/Content/SelectedCurrencyHistory.xaml?Name=" + currency.Name,
-                        UriKind.Relative)
-                });
+                toReturn.Add(currency.ToLink());
             }
 
             return toReturn;
         }
+
+        public static Link ToLink(this CurrencyEF currency)
+        {
+            return new Link()
+            {
+                DisplayName = currency.Name,
+                Source = new Uri(
+                    "/Content/SelectedCurrencyHistory.xaml?Name=" + currency.Name,
+                    UriKind.Relative)
+            };
+        }
+
+        public static IEnumerable<string> ToListOfString(this IEnumerable<CurrencyEF> currencies)
+        {
+            return currencies.Select(x => x.Name);
+        } 
     }
 }

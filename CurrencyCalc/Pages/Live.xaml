@@ -68,21 +68,21 @@
         
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="3*" />
             </Grid.ColumnDefinitions>
             
             <TextBox Grid.Column="0" Text="{Binding MoneyCalcModel.InputMoney}" TextAlignment="Center"
                      FontSize="38" IsEnabled="{Binding SelectedCurrency, Converter={StaticResource InstanceToEnableConverter}}" />
-            <TextBlock Grid.Column="1" Text="{Binding MoneyCalcModel.InputCurrSymbol}" />
+            <TextBlock Grid.Column="1" Text="{Binding MoneyCalcModel.InputCurrSymbol}" VerticalAlignment="Center" FontSize="30" TextAlignment="Center" />
             <Button IsEnabled="{Binding SelectedCurrency, Converter={StaticResource InstanceToEnableConverter}}"
                     Grid.Column="2" Command="{Binding ReverseCurrenciesCommand}">
                 <Image Source="../Images/swap.png"  />
             </Button>
-            <TextBlock Grid.Column="1" Text="{Binding MoneyCalcModel.OutputCurrSymbol}" />
+            <TextBlock Grid.Column="3" Text="{Binding MoneyCalcModel.OutputCurrSymbol}" VerticalAlignment="Center" FontSize="30" TextAlignment="Center" />
             <TextBox IsEnabled="False" Grid.Column="4" Text="{Binding MoneyCalcModel.OutputMoney}" FontSize="38" TextAlignment="Center" />
         </Grid>
     </Grid>
