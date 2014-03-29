@@ -27,21 +27,12 @@ namespace CurrencyCalc.ViewModels
 
         public IEnumerable<RateEF> Rates
         {
-            get { return _currency.Rates.Take(LimitOfPoints); }
+            get { return Currency.Rates.Take(LimitOfPoints); }
         }
 
         public SelCurrHistoryViewModel()
         {
-            Messenger.Default.Register<CurrencyEF>(this, "currencyChangedMsg", x =>
-            {
-                Currency = x;
-                ReloadChart();
-            });
-        }
-
-        private void ReloadChart()
-        {
-            //throw new System.NotImplementedException();
+            Messenger.Default.Register<CurrencyEF>(this, "currencyChangedMsg", x => Currency = x);
         }
     }
 }

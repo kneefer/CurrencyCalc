@@ -30,7 +30,7 @@ namespace CurrencyCalc.ViewModels
             BaseCurrency = Currencies.FirstOrDefault();
 
             _timer.Interval = TimeSpan.FromMinutes(IntervalOfUpdateInMinutes);
-            _timer.Tick += (sender, args) => UpdateCurrencies();
+            _timer.Tick += async (sender, args) => await UpdateCurrencies();
             _timer.Start();
         }
 

@@ -31,8 +31,8 @@ namespace CurrencyCalc.ViewModels
                 if (value != _selectedCurrencyLink)
                 {
                     _selectedCurrencyLink = value;
-                    SelectedCurrencyLinkChanged(value);
                     RaisePropertyChanged("SelectedCurrencyLink");
+                    SelectedCurrencyLinkChanged(value);
                 }
             }
         }

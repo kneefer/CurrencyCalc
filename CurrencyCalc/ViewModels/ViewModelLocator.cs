@@ -9,7 +9,7 @@ namespace CurrencyCalc.ViewModels
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
-            SimpleIoc.Default.Register<LiveViewModel>();
+            SimpleIoc.Default.Register<LiveViewModel>(true);
             SimpleIoc.Default.Register<AboutViewModel>();
             SimpleIoc.Default.Register<HistoryViewModel>(true);
             SimpleIoc.Default.Register<SelCurrHistoryViewModel>(true);

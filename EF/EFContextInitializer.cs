@@ -4,7 +4,7 @@ using EF.Entities;
 
 namespace EF
 {
-    public class EFContextInitializer : DropCreateDatabaseAlways<EFContext>
+    public class EFContextInitializer : DropCreateDatabaseIfModelChanges<EFContext>
     {
         protected override void Seed(EFContext context)
         {
