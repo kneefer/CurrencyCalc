@@ -35,9 +35,22 @@ namespace CurrencyCalc.Utilities
                 .HtmlDecode();
 
             var request = new RestRequest(resource, Method.GET);
+            var z = _client.Execute<RootObject>(request);
+
             _client.ExecuteAsync<RootObject>(request, result => tcs.SetResult(result.Data.Query.Results.Rates));
 
             return tcs.Task;
+        }
+
+        public async Task<Rate> CheckIfCurrencyExistsAsync(string currencyName, string baseCurrency)
+        {
+            var found = await TakeExchangesAsync(new List<string> {currencyName}, baseCurrency);
+            var foundList = found as IList<Rate> ?? found.ToList();
+            if (!foundList.First().RateValue.Equals(0))
+            {
+                return foundList.First();
+            }
+            return null;
         }
     }
 }

@@ -41,7 +41,7 @@ namespace CurrencyCalc.ViewModels
 
         private void ReloadChart()
         {
-            throw new System.NotImplementedException();
+            //throw new System.NotImplementedException();
         }
     }
 }

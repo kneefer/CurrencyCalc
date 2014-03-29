@@ -5,28 +5,85 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d" d:DesignHeight="439" d:DesignWidth="639"
              DataContext="{Binding Live, Source={StaticResource ViewModelLocator}}"
-             xmlns:mui="http://firstfloorsoftware.com/ModernUI">
+             xmlns:utilities="clr-namespace:CurrencyCalc.Utilities">
 
+    <UserControl.Resources>
+        <utilities:InstanceToEnableConverter x:Key="InstanceToEnableConverter" />
+    </UserControl.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         
-        
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            
+            <DataGrid ItemsSource="{Binding Currencies}" SelectedItem="{Binding SelectedCurrency}"
+                      AutoGenerateColumns="False" CanUserAddRows="False" Grid.Column="0">
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn MinWidth="120" Header="Name" Width="*" IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}" TextAlignment="Center" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn MinWidth="120" Header="Last update" Width="*" IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock TextAlignment="Center" Text="{Binding LastUpdate, StringFormat=hh:mm - dd.MM}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn MinWidth="120" Header="Current value" Width="*" IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock TextAlignment="Center" Text="{Binding CurrentValue}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            
+            <StackPanel Grid.Column="1" Margin="10 0">
+                <TextBlock Text="Select a base currency" Margin="0 5" TextAlignment="Center" />
+                <ComboBox ItemsSource="{Binding Currencies}" 
+                          SelectedItem="{Binding BaseCurrency, Mode=TwoWay}" DisplayMemberPath="Name" />
+                <TextBlock Text="Add new currency by a symbol" TextAlignment="Center" Margin="0 15 0 5" />
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBox MaxLength="3" Text="{Binding NewCurrencyName}" Grid.Column="0" />
+                    <Button Content="Add" Command="{Binding AddNewCurrencyCommand}" Grid.Column="1" />
+                </Grid>
+            </StackPanel>
+        </Grid>
         
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             
-            <TextBox Grid.Column="0" Text="{Binding InputMoney}" TextAlignment="Center" FontSize="38" />
-            <Button Grid.Column="1" Command="{Binding ReverseCurrenciesCommand}">
+            <TextBox Grid.Column="0" Text="{Binding MoneyCalcModel.InputMoney}" TextAlignment="Center"
+                     FontSize="38" IsEnabled="{Binding SelectedCurrency, Converter={StaticResource InstanceToEnableConverter}}" />
+            <TextBlock Grid.Column="1" Text="{Binding MoneyCalcModel.InputCurrSymbol}" />
+            <Button IsEnabled="{Binding SelectedCurrency, Converter={StaticResource InstanceToEnableConverter}}"
+                    Grid.Column="2" Command="{Binding ReverseCurrenciesCommand}">
                 <Image Source="../Images/swap.png"  />
             </Button>
-            <TextBox IsEnabled="False" Grid.Column="2" Text="{Binding OutputMoney}" FontSize="38" TextAlignment="Center" />
+            <TextBlock Grid.Column="1" Text="{Binding MoneyCalcModel.OutputCurrSymbol}" />
+            <TextBox IsEnabled="False" Grid.Column="4" Text="{Binding MoneyCalcModel.OutputMoney}" FontSize="38" TextAlignment="Center" />
         </Grid>
     </Grid>
 

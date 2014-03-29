@@ -110,6 +110,7 @@
       <DependentUpon>SelectedCurrencyHistory.xaml</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\ExtensionMethods.cs" />
+    <Compile Include="Models\MoneyCalcModel.cs" />
     <Compile Include="Models\REST Models\Query.cs" />
     <Compile Include="Models\REST Models\Rate.cs" />
     <Compile Include="Models\REST Models\Results.cs" />
@@ -124,7 +125,10 @@
       <DependentUpon>Live.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="Utilities\InstanceToEnableConverter.cs" />
+    <Compile Include="Utilities\Mappers.cs" />
     <Compile Include="Utilities\YahooRest.cs" />
+    <Compile Include="ViewModels\Properties\LiveVMProperties.cs" />
     <Compile Include="ViewModels\SelCurrHistoryViewModel.cs" />
     <Compile Include="ViewModels\AboutViewModel.cs" />
     <Compile Include="ViewModels\HistoryViewModel.cs" />
