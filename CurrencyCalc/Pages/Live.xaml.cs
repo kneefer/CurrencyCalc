@@ -10,9 +10,6 @@ namespace CurrencyCalc.Pages
         public Live()
         {
             InitializeComponent();
-
-            var rest = new YahooXChangeRest();
-            rest.TakeExchangesAsync(new List<string> {"USD", "EUR", "CHF"}, "PLN");
         }
     }
 }

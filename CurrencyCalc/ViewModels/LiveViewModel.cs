@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
 using CurrencyCalc.Utilities;
 using EF;
 using EF.Entities;
@@ -33,7 +34,8 @@ namespace CurrencyCalc.ViewModels
 
                 if (foundCurrency != null)
                 {
-                    foundCurrency.MapToEntity();
+                    var res = foundCurrency.MapToEntity();
+                    MessageBox.Show("DUPA");
                 }
             }
         }

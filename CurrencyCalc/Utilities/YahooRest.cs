@@ -14,10 +14,10 @@ namespace CurrencyCalc.Utilities
         private readonly RestClient _client;
         public YahooXChangeRest()
         {
-            _client = new RestClient(BaseUrl);
+            _client = new RestClient(BaseUrl) {Timeout = 2000};
         }
 
-        public Task<IEnumerable<Rate>> TakeExchangesAsync(IEnumerable<string> currencies, string baseCurrency, IEnumerable<string> columnsList = null)
+        public Task<IEnumerable<rate>> TakeExchangesAsync(IEnumerable<string> currencies, string baseCurrency, IEnumerable<string> columnsList = null)
         {
             // if there weren't any selections - default parameter
             if (columnsList == null) columnsList = new List<string> {"*"};
@@ -25,7 +25,7 @@ namespace CurrencyCalc.Utilities
             currencies = currencies.Select(x => x += baseCurrency);
 
             // provides async result in the caller
-            var tcs = new TaskCompletionSource<IEnumerable<Rate>>();
+            var tcs = new TaskCompletionSource<IEnumerable<rate>>();
 
             var resource = String.Format(@"yql?q=select {3} from yahoo.finance.xchange {0}{1}{2}",
                                           "where pair in (%22" + currencies.Aggregate((a, b) => String.Format("{0}%22,%22{1}", a, b)) + "%22)",
@@ -35,18 +35,21 @@ namespace CurrencyCalc.Utilities
                 .HtmlDecode();
 
             var request = new RestRequest(resource, Method.GET);
-            var z = _client.Execute<RootObject>(request);
 
-            _client.ExecuteAsync<RootObject>(request, result => tcs.SetResult(result.Data.Query.Results.Rates));
+            _client.ExecuteAsync<RootObject>(request, result => tcs.SetResult(result.ResponseStatus == ResponseStatus.TimedOut
+                ? null
+                : result.Data.Query.Results.Rate));
 
             return tcs.Task;
         }
 
-        public async Task<Rate> CheckIfCurrencyExistsAsync(string currencyName, string baseCurrency)
+        public async Task<rate> CheckIfCurrencyExistsAsync(string currencyName, string baseCurrency)
         {
             var found = await TakeExchangesAsync(new List<string> {currencyName}, baseCurrency);
-            var foundList = found as IList<Rate> ?? found.ToList();
-            if (!foundList.First().RateValue.Equals(0))
+            if (found == null) return null;
+
+            var foundList = found as IList<rate> ?? found.ToList();
+            if (foundList.First().Rate != "0.00")
             {
                 return foundList.First();
             }

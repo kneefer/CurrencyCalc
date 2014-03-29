@@ -5,7 +5,6 @@ namespace CurrencyCalc.Models
 {
     public class Results
     {
-        [SerializeAs(Name = "Rate")]
-        public List<Rate> Rates { get; set; }
+        public List<rate> Rate { get; set; }
     }
 }
