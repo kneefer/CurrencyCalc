@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using CurrencyCalc.Models;
 using EF.Entities;
 using GalaSoft.MvvmLight;
@@ -10,6 +11,7 @@ namespace CurrencyCalc.ViewModels
     {
         public RelayCommand ReverseCurrenciesCommand { get; set; }
         public RelayCommand AddNewCurrencyCommand { get; set; }
+        public RelayCommand<string> InputChangedCommand { get; set; }
 
         private ObservableCollection<CurrencyEF> _currencies;
         private MoneyCalcModel _moneyCalcModel = new MoneyCalcModel();
@@ -26,8 +28,9 @@ namespace CurrencyCalc.ViewModels
                 {
                     _selectedCurrencyEF = value;
                     RaisePropertyChanged("SelectedCurrency");
-                    MoneyCalcModel.InputCurrSymbol = value.Name;
-                    MoneyCalcModel.OutputCurrSymbol = BaseCurrency.Name;
+                    MoneyCalcModel.InputCurrency = value;
+                    MoneyCalcModel.OutputCurrency = BaseCurrency;
+                    MoneyCalcModel.OutputMoney = MoneyCalcModel.CalculateOutput();
                 }
             }
         }
@@ -40,13 +43,12 @@ namespace CurrencyCalc.ViewModels
                 {
                     _baseCurrency = value;
                     RaisePropertyChanged("BaseCurrency");
-                    MoneyCalcModel.InputCurrSymbol = SelectedCurrency.Name;
-                    MoneyCalcModel.OutputCurrSymbol = value.Name;
+                    MoneyCalcModel.InputCurrency = SelectedCurrency;
+                    MoneyCalcModel.OutputCurrency = value;
                     BaseCurrencyChanged();
                 }
             }
         }
-
         public MoneyCalcModel MoneyCalcModel
         {
             get { return _moneyCalcModel; }
@@ -56,7 +58,6 @@ namespace CurrencyCalc.ViewModels
                 {
                     _moneyCalcModel = value;
                     RaisePropertyChanged("MoneyCalcModel");
-                    ProceedCalculation();
                 }
             }
         }
@@ -89,6 +90,7 @@ namespace CurrencyCalc.ViewModels
         {
             ReverseCurrenciesCommand = new RelayCommand(SwapCurrencies);
             AddNewCurrencyCommand = new RelayCommand(AddNewCurrency);
+            InputChangedCommand = new RelayCommand<string>(InputChanged);
         }
     }
 }

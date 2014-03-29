@@ -1,4 +1,6 @@
-﻿using FirstFloor.ModernUI.Presentation;
+﻿using System;
+using EF.Entities;
+using FirstFloor.ModernUI.Presentation;
 
 namespace CurrencyCalc.Models
 {
@@ -6,16 +8,19 @@ namespace CurrencyCalc.Models
     {
         private double _inputMoney;
         private double _outputMoney;
-        private string _inputCurrSymbol;
-        private string _outputCurrSymbol;
+        private CurrencyEF _inputCurrency;
+        private CurrencyEF _outputCurrency;
 
         public double InputMoney
         {
             get { return _inputMoney; }
             set
             {
-                _inputMoney = value;
-                OnPropertyChanged("InputMoney");
+                if (value != _inputMoney)
+                {
+                    _inputMoney = value;
+                    OnPropertyChanged("InputMoney");
+                }
             }
         }
         public double OutputMoney
@@ -23,26 +28,57 @@ namespace CurrencyCalc.Models
             get { return _outputMoney; }
             set
             {
+                if (value != _outputMoney)
+                {
+                    _outputMoney = value;
+                }
                 _outputMoney = value;
                 OnPropertyChanged("OutputMoney");
             }
         }
-        public string InputCurrSymbol
+
+        public CurrencyEF InputCurrency
         {
-            get { return _inputCurrSymbol; }
+            get { return _inputCurrency; }
             set
             {
-                _inputCurrSymbol = value;
-                OnPropertyChanged("InputCurrSymbol");
+                if (value != _inputCurrency)
+                {
+                    _inputCurrency = value;
+                    OnPropertyChanged("InputCurrency");
+                }
             }
         }
-        public string OutputCurrSymbol
+        public CurrencyEF OutputCurrency
         {
-            get { return _outputCurrSymbol; }
+            get { return _outputCurrency; }
             set
             {
-                _outputCurrSymbol = value;
-                OnPropertyChanged("OutputCurrSymbol");
+                if (value != _outputCurrency)
+                {
+                    _outputCurrency = value;
+                    OnPropertyChanged("OutputCurrency");
+                }
+            }
+        }
+
+        public double CalculateOutput(string str = null)
+        {
+            try
+            {
+                if (str == null)
+                {
+                    return Math.Round((InputMoney * InputCurrency.CurrentValue) / OutputCurrency.CurrentValue, 4);
+                }
+                else
+                {
+                    str = str.Replace(".", ",");
+                    return Math.Round((Double.Parse(str)*InputCurrency.CurrentValue)/OutputCurrency.CurrentValue, 4);
+                }
+            }
+            catch (Exception)
+            {
+                return 0;
             }
         }
     }

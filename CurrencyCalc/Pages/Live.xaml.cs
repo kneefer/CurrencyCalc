@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Windows;
+﻿using System;
 using System.Windows.Controls;
-using CurrencyCalc.Utilities;
+using CurrencyCalc.ViewModels;
 
 namespace CurrencyCalc.Pages
 {
@@ -10,6 +9,15 @@ namespace CurrencyCalc.Pages
         public Live()
         {
             InitializeComponent();
+        }
+
+        private void TextBoxInput_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            var vm = (DataContext as LiveViewModel);
+            if (vm != null)
+            {
+                vm.InputChangedCommand.Execute(TextBoxInput.Text);
+            }
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+using System.Windows;
 using CurrencyCalc.Infrastructure;
 using CurrencyCalc.Utilities;
 using EF;
@@ -20,11 +21,6 @@ namespace CurrencyCalc.ViewModels
         {
             InitializeCommands();
             Currencies = new ObservableCollection<CurrencyEF>(_context.Currencies);
-
-            MoneyCalcModel.PropertyChanged += (s, e) =>
-            {
-                if (e.PropertyName.Equals("InputMoney")) ProceedCalculation();
-            };
         }
 
         private async void AddNewCurrency()
@@ -64,27 +60,23 @@ namespace CurrencyCalc.ViewModels
             }
             NewCurrencyName = String.Empty;
         }
-
-        private void ProceedCalculation()
-        {
-            //throw new System.NotImplementedException();
-        }
         
         private void SwapCurrencies()
         {
             var memory = MoneyCalcModel.OutputMoney;
-            var memory2 = MoneyCalcModel.OutputCurrSymbol;
+            var memory2 = MoneyCalcModel.OutputCurrency;
 
             MoneyCalcModel.OutputMoney = MoneyCalcModel.InputMoney;
             MoneyCalcModel.InputMoney = memory;
 
-            MoneyCalcModel.OutputCurrSymbol = MoneyCalcModel.InputCurrSymbol;
-            MoneyCalcModel.InputCurrSymbol = memory2;
+            MoneyCalcModel.OutputCurrency = MoneyCalcModel.InputCurrency;
+            MoneyCalcModel.InputCurrency = memory2;
         }
 
         private async void BaseCurrencyChanged()
         {
             await UpdateCurrencies();
+            MoneyCalcModel.OutputMoney = MoneyCalcModel.CalculateOutput();
         }
 
         private async Task UpdateCurrencies()
@@ -95,6 +87,11 @@ namespace CurrencyCalc.ViewModels
                 BaseCurrency.Name);
 
             Currencies.Update(currencies);
+        }
+
+        private void InputChanged(string str)
+        {
+            MoneyCalcModel.OutputMoney = MoneyCalcModel.CalculateOutput(str);
         }
     }
 }
