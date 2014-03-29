@@ -8,7 +8,7 @@
     
     <mui:ModernWindow.MenuLinkGroups>
         
-        <mui:LinkGroup DisplayName="currency calc - welcome">
+        <mui:LinkGroup DisplayName="currency calc">
             <mui:LinkGroup.Links>
                 <mui:Link  DisplayName="LIVE" Source="Pages/Live.xaml" />
                 <mui:Link DisplayName="HISTORY" Source="Pages/History.xaml"  />

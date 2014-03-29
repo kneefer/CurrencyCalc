@@ -7,11 +7,15 @@
              mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300"
              DataContext="{Binding About, Source={StaticResource ViewModelLocator}}">
     <Grid Style="{StaticResource ContentRoot}">
-        <mui:ModernTab Layout="List" SelectedSource="/Content/SettingsAppearance.xaml">
-            <mui:ModernTab.Links>
-                <mui:Link DisplayName="appearance" Source="/Content/SettingsAppearance.xaml" />
-                <mui:Link DisplayName="about" Source="/Pages/About.xaml" />
-            </mui:ModernTab.Links>
-        </mui:ModernTab>
+        <mui:ModernFrame>
+            <StackPanel>
+                <TextBlock>Created by</TextBlock>
+                <TextBlock>Szymon Bartnik</TextBlock>
+                <StackPanel Orientation="Horizontal" Margin="0 30 0 0">
+                    <TextBlock VerticalAlignment="Center" Margin="0 0 30 0">for</TextBlock>
+                    <Image Width="200" Source="../Images/egzotech.png" />
+                </StackPanel>
+            </StackPanel>
+        </mui:ModernFrame>
     </Grid>
 </UserControl>

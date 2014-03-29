@@ -59,7 +59,9 @@ namespace CurrencyCalc.Infrastructure
         {
             foreach (var currency in currencies)
             {
-                currency.CurrentValue = newCurrencies.First(x => x.Id.Substring(0, 3) == currency.Name).Rate.MapTheDouble();
+                var found = newCurrencies.First(x => x.Id.Substring(0, 3) == currency.Name);
+                currency.CurrentValue = found.Rate.MapTheDouble();
+                currency.LastUpdate = Mappers.MapTheDate(found.Date, found.Time);
             }
         } 
     }

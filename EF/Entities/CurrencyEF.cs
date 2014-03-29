@@ -29,7 +29,6 @@ namespace EF.Entities
                 }
             }
         }
-
         public double CurrentValue
         {
             get { return _currentValue; }
@@ -53,9 +52,7 @@ namespace EF.Entities
                 "CurrentValue: {3}, Rates: {4}",
                 Id, Name, LastUpdate, CurrentValue, str);
         }
-
         public event PropertyChangedEventHandler PropertyChanged;
-
         private void OnPropertyChanged(string propertyName)
         {
             if (PropertyChanged == null) return;

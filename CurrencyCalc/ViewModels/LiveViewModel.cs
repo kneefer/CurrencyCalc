@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Threading;
 using CurrencyCalc.Infrastructure;
 using CurrencyCalc.Utilities;
 using EF;
@@ -15,12 +17,21 @@ namespace CurrencyCalc.ViewModels
 {
     public partial class LiveViewModel
     {
-        private EFContext _context = App.Context;
+        private readonly EFContext _context = App.Context;
+        private readonly DispatcherTimer _timer = new DispatcherTimer();
+        private const int IntervalOfUpdateInMinutes = 20;
         
         public LiveViewModel()
         {
             InitializeCommands();
             Currencies = new ObservableCollection<CurrencyEF>(_context.Currencies);
+
+            // selecting default currency
+            BaseCurrency = Currencies.FirstOrDefault();
+
+            _timer.Interval = TimeSpan.FromMinutes(IntervalOfUpdateInMinutes);
+            _timer.Tick += (sender, args) => UpdateCurrencies();
+            _timer.Start();
         }
 
         private async void AddNewCurrency()
@@ -39,6 +50,7 @@ namespace CurrencyCalc.ViewModels
                         Content = "No currency with symbol: " + NewCurrencyName.ToUpper()
                     }.Show();
 
+                    NewCurrencyName = String.Empty;
                     return;
                 }
 
@@ -46,7 +58,7 @@ namespace CurrencyCalc.ViewModels
                 _context.Currencies.Add(res);
                 await _context.SaveChangesAsync();
 
-                // adding to observable collections
+                // adding to an observable collections
                 Messenger.Default.Send(res, "newCurrencyMsg");
                 Currencies.Add(res);
             }
@@ -58,6 +70,7 @@ namespace CurrencyCalc.ViewModels
                     Content = "Following currency already exists: " + NewCurrencyName.ToUpper()
                 }.Show();
             }
+
             NewCurrencyName = String.Empty;
         }
         
