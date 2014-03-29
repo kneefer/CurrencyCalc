@@ -18,7 +18,7 @@ namespace CurrencyCalc.Utilities
             };
         }
 
-        private static DateTime MapTheDate(string date, string time)
+        public static DateTime MapTheDate(string date, string time)
         {
             var toReturnDate = DateTime.ParseExact(date, "M/d/yyyy", new CultureInfo("en-US"));
             var toReturnTime = DateTime.Parse(time);
@@ -27,7 +27,7 @@ namespace CurrencyCalc.Utilities
             return toReturnDate;
         }
 
-        private static double MapTheDouble(this string dbl)
+        public static double MapTheDouble(this string dbl)
         {
             return Double.Parse(dbl, NumberFormatInfo.InvariantInfo);
         }

@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text.RegularExpressions;
+using CurrencyCalc.Models;
+using CurrencyCalc.Utilities;
 using EF.Entities;
 using FirstFloor.ModernUI.Presentation;
 
@@ -50,6 +53,14 @@ namespace CurrencyCalc.Infrastructure
         public static IEnumerable<string> ToListOfString(this IEnumerable<CurrencyEF> currencies)
         {
             return currencies.Select(x => x.Name);
+        }
+
+        public static void Update(this IEnumerable<CurrencyEF> currencies, IEnumerable<rate> newCurrencies)
+        {
+            foreach (var currency in currencies)
+            {
+                currency.CurrentValue = newCurrencies.First(x => x.Id.Substring(0, 3) == currency.Name).Rate.MapTheDouble();
+            }
         } 
     }
 }

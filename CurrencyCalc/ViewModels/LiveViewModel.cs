@@ -94,7 +94,7 @@ namespace CurrencyCalc.ViewModels
                 Currencies.ToListOfString(),
                 BaseCurrency.Name);
 
-
+            Currencies.Update(currencies);
         }
     }
 }
